@@ -7,24 +7,80 @@
 ● Custom Rounding: Round a number to a specified number of decimal places.
 */
 
-// const readline = require('readline-sync');
+const readline = require('readline-sync');
 
-// while (true) {
-
-//     //list possible functions
-
-//     //prompt for readline
-//     let funcChoice = readline.question("Choose a function. ");
+//list possible functions
+//prompt for readline
+let funcChoice = readline.question(`Choose a function (input is case-sensitive): 
+    Absolute value
+    Power
+    Square root
+    Max
+    Min
+    Random number
+    Round \n`);
     
-//     //switch cases choose method
+//switch cases choose method
+//default case re-prompt
 
-//     //get case for end loop (break)
+let inputNum;
 
-//     //default case re-prompt
+switch(funcChoice.trim()) {
 
-//     // prompt for a number
+    case "Absolute value":
 
-// }
+        inputNum = readline.questionFloat("Input a number to take the absolute value of: ");
+        console.log(`Absolute value: ${calcAbs(inputNum)}`);
+        break;
+    
+    case "Power":
+
+        inputNum = readline.questionFloat("Input a number to raise to a power: ");
+        let inputPow = readline.questionInt("Input a power: ");
+        console.log(`Result: ${calcPower(inputNum, inputPow)}`);
+        break;
+
+    case "Square root":
+
+        inputNum = readline.questionFloat("Input a number to raise to take the square root of: ");
+        console.log(`Result: ${calcSqrt(inputNum)}`);
+        break;
+
+    case "Max":
+
+        inputNum = readline.question("Input numbers separated by only spaces and press enter when finished: ");
+        console.log(`Maximum value: ${calcMax(inputNum)}`);
+        break;
+
+    case "Min":
+
+        inputNum = readline.question("Input numbers separated by only spaces and press enter when finished: ");
+        console.log(`Minimum value: ${calcMin(inputNum)}`);
+        break;
+
+    case "Random number":
+
+        let inputFloor = readline.questionInt("Input a lower bound: ");
+        let inputCeiling = readline.questionInt("Input an upper bound: ");
+
+        console.log(`Random number: ${getRandFromRange(inputFloor, inputCeiling)}`);
+        break;
+
+    case "Round":
+
+        inputNum = readline.questionFloat("Input a decimal to round: ");
+        let roundFactor = readline.questionInt("How many decimal places? ");
+        console.log(`Rounded: ${roundCustom(inputNum, roundFactor)}`);
+        break;
+
+    default:
+        console.log(`Please choose a valid function.`);
+
+
+}
+
+
+
 
 
 function calcAbs(input) {
@@ -33,7 +89,7 @@ function calcAbs(input) {
 
 }
 
-console.log("Absolute value example: " + calcAbs(-45.67));
+// console.log("Absolute value example: " + calcAbs(-45.67));
 
 function calcPower(input, power) {
 
@@ -41,33 +97,39 @@ function calcPower(input, power) {
 
 }
 
-console.log("Power example: "+ calcPower(5, 3));
+// console.log("Power example: "+ calcPower(5, 3));
 
 function calcSqrt(input) {
 
-    return Math.sqrt(Math.abs(input));
+    return Math.sqrt(Math.abs(input)); // Performs absolute value calculation first to ensure no NaN's are returned
 
 }
 
-console.log("Square root example: "+ calcSqrt(-144));
+// console.log("Square root example: "+ calcSqrt(-144));
 
 function calcMax(input) {
 
-    return Math.max(...input);
-    // Use spread operator on input array
+    // Split input string into an array
+    let inputArr = input.split(" ");
 
+    // Use spread operator on input array
+    return Math.max(...inputArr);
+    
 }
 
-console.log("Max example: " + calcMax([3, 78, -12, 0.5, 27]));
+// console.log("Max example: " + calcMax([3, 78, -12, 0.5, 27]));
 
 function calcMin(input) {
 
-    return Math.min(...input);
-    // Use spread operator on input array
+    // Split input string into an array
+    let inputArr = input.split(" ");
 
+    // Use spread operator on input array
+    return Math.min(...inputArr);
+    
 }
 
-console.log("Min example: " + calcMin([3, 78, -12, 0.5, 27]));
+// console.log("Min example: " + calcMin([3, 78, -12, 0.5, 27]));
 
 function getRandFromRange(floor, ceiling) {
 
@@ -75,7 +137,7 @@ function getRandFromRange(floor, ceiling) {
     
 }
 
-console.log("Random example: " + getRandFromRange(1, 50));
+// console.log("Random example: " + getRandFromRange(1, 50));
 
 function roundCustom(input, numDecimalPlaces) {
 
@@ -85,4 +147,4 @@ function roundCustom(input, numDecimalPlaces) {
 
 }
 
-console.log("Custom rounding example: " + roundCustom(23.67891, 2));
+// console.log("Custom rounding example: " + roundCustom(23.67891, 2));
